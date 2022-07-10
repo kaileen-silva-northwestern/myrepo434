@@ -60,6 +60,7 @@ jobs:
       - run:
           name: deploy to app engine
           command: |
+            gcloud iam service-accounts keys create key.json --iam-account=project434@myproject434-355720.iam.gserviceaccount.com
             gcloud auth activate-service-account project434@myproject434-355720.iam.gserviceaccount.com --key-file=key.json
             gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
             gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
