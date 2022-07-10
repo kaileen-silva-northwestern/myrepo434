@@ -56,11 +56,11 @@ jobs:
           command: |
             . venv/bin/activate
             make lint
-      # deplot to GCP!
+      # deploy to GCP!
       - run:
           name: deploy to app engine
           command: |
-            echo ${GCLOUD_SERVICE_KEY} | gcloud auth activate-service-account project434@myproject434-355720.iam.gserviceaccount.com --key-file="MIIEugIBADANBgkqhkiG9w0BAQEFAASCBKQwggSgAgEAAoIBAQCt2vdvmG2Rl/v3\nOHlUq0MzMJqDacZqNTiJKDRmYpsPoX3jNJFBPlAXDJjsbhm4sHImR/s6vH0JpdPP\n/Cry84fNpW/r7o1kJSPScjHQC7AGt0i7JQ4FKMiOzje6K5g+t/EofWTH2Mob30V8\n8uU2TW8OJTAds46kMJvi4ALDJ8laBdReeRTB+6hvW/UQIU5f0KEo8rp1RIiDuLz7\nETKTB3/Ls7q6gLw/Ip05ojVOjkFOtekHf36Ei35HcRbSOHuELU0d9jyPn2+N5ULx\ny9P1uwQFKxlDAbmnE5JDR2vVYYvAU0CG5up/tSlKblvNCId5FZw15/rT1tmHjt4z\nn2P20SZFAgMBAAECgf9pHel9oiwLNzUzxQPgZIgGNJPKKjyWsbu0Da1X8UbP9cJe\nsA6RCMCtLwL+OiYKBTeRyT0LNDVBRKcDvqsUqAXP0UnISs+gPWbGxPvHBZMx6g2P\nrA67xrYPD+mh3bn4xD7UvGogtHM1+UlBVVJBcLTHWLTRQIjHdFNe6+4tWjx2Z6Cx\nVDchXQBghsnOoEMm28d7zriGTPQjKxEMhkq6ivN+dEjmM3H+VKIdLywDHVpB/JHq\njdWbmyGNGcqBruf3+fxUcuvsx8aSEfpXZxdljeOk2ab74EJANttWuzqbvZPKiYZs\nIJW+QRMEL7PwMVkiQcOP3MezvavbBJ+DYZD5O1cCgYEA8gJJ4qaQjy3hMKjX8hgX\nGRrDyoQRa6T5P4FEDDGOaQVx9FMpBYkmRYV0ubK5/JpndCZkLWlGLtwVRIJl53U+\nXkVKITsSXLFY5PoZgVYdFifswS5OTZ+2wF+OxnVHq0/hsarB8eAugIgyml9NQm8o\nxNpR9KP1DNYyrmYDacEfXYcCgYEAt+gCsUnVcGWVMT7KIbKsiFEF16XLMHcPP6+j\neZoY3Yk4GXWK4ymoI3YalK7Y+zLcCB5zRI19B5G5SqH4K/dDl/uDK5r69maq4k65\nSSZntFvX5y5oW97i9k5AghTmLjz7ue2c3ecHI2icJWbQ4yejxCo7jqUn8ft47dTt\nPcmUcNMCgYBIWPbNkw3UP9r6OP+VmC4PizjM6f5rN75rhbFaE9aG/uG6MMIqrX2L\newISIaQIKACVcISyLq6Ug6a3/GOKdjpW5E/s70PmAf6ZNUs6pwu6++SDO9ycyApS\nKD7+hUEPranC+1FPhb1hH1ZBYAwwuBpv/vRRNlKjq8Uq7cRHcTx3MQKBgGLvrSsl\ndm7uJ1ID3og8cDcxp3v5FJOxKYHwgniz3vankIeZxaspyOuy6N/eJJsXJGo1v3s8\nxuugiNdOxY0Zi8Kiq1F1IdgXKY1wHpvszlOoKUGUpM3v3Zf2Rxv0FFUBt8axvvde\nB2gUKhSw+GWL+L1anwnBbfjveYIxT6Qy4unDAoGAWSJCgU2Lz7WZvZSmQzV+KL37\nI3Zrssl+D9FhrGwyExk/qa9YxBmUP85ScJCNMN8r3lZ40U+hZf8nszohIINTnIAc\nLTdjavXYJbjc6ui6+OBJ2pjT9axvIrQ1gYVmnncKlH0kVeshEIRmJ+Exl/elBf8L\n90Ru55/wHfS0mtyW4qU="
+            gcloud auth activate-service-account project434@myproject434-355720.iam.gserviceaccount.com --key-file=-
             gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
             gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
-            cd gcloud app deploy
+            gcloud app deploy
