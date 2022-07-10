@@ -60,7 +60,7 @@ jobs:
       - run:
           name: deploy to app engine
           command: |
-            echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+            echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account project434@myproject434-355720.iam.gserviceaccount.com --key-file=myproject434-355720-f2e23a2a2a8742.json
             gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
             gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
             cd api-mlresponse && gcloud app deploy
