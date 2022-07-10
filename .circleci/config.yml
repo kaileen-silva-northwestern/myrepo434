@@ -63,4 +63,4 @@ jobs:
             echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
             gcloud --quiet config set project myproject434-355720
             gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
-            cd api-mlresponse && gcloud app deploy
+            gcloud app deploy
