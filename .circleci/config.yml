@@ -73,3 +73,9 @@ jobs:
             . venv/bin/activate
             make lint
       # deploy to Azure
+      - run:
+          name: deploy to Azure
+          command: |
+            az login
+              --name $APP_SERVICE_NAME \
+              --resource-group $RESOURCE_GROUP_NAME
