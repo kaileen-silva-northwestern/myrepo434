@@ -3,7 +3,19 @@
 # Check https://circleci.com/docs/2.0/language-python/ for more details
 #
 version: 2.1
+
+orbs:
+  azure-cli: circleci/azure-cli@1.2.2
+
 jobs:
+  verify-install:
+    executor: azure-cli/default
+    steps:
+      - azure-cli/install
+      - run:
+          command: az -v
+          name: Verify Azure CLI is installed
+
   build:
     docker:
       # specify the version you desire here
@@ -19,6 +31,7 @@ jobs:
     working_directory: ~/repo
 
     steps:
+      - azure-cli/install
       - checkout
 
       # Download and cache dependencies
