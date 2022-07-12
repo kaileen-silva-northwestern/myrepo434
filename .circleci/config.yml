@@ -41,6 +41,9 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
       - run:
+          name: install-packages
+          command: npm install
+      - run:
           name: Install System Dependencies
           command: sudo apt-get update && sudo apt-get install
 
@@ -73,9 +76,3 @@ jobs:
             . venv/bin/activate
             make lint
         # run deploy web app to azure
-      - run:
-          name: deploy webapp to azure
-          command: |
-            uses: azure/webapps-deploy@v1
-            with:
-              app-name: Project434
