@@ -76,4 +76,6 @@ jobs:
       - run:
           name: "Deploy Web App to Azure"
           command: |
-            az webapp deployment
+            az login \
+            -u $AZURE_USERNAME \
+            -p $AZURE_PASSWORD
