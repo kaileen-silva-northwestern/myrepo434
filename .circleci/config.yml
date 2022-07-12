@@ -40,9 +40,7 @@ jobs:
           - v1-dependencies-{{ checksum "requirements.txt" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
-      - run:
-          name: install-packages
-          command: npm install
+
       - run:
           name: Install System Dependencies
           command: sudo apt-get update && sudo apt-get install
