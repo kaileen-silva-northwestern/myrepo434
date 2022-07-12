@@ -58,8 +58,8 @@ jobs:
       - save_cache:
           paths:
             - ./venv
-          key: v1-dependencies-{{ checksum "requirements.txt" }}
-        
+          key: v1-dependencies-{{ checksum "requirements.txt" }}   
+
       # run tests!
       - run:
           name: run tests
@@ -74,8 +74,8 @@ jobs:
             make lint
         # run deploy web app to azure
       - run:
-          name: "Deploy Web App to Azure"
+          name: deploy webapp to azure
           command: |
-            az login \
-            -u $AZURE_USERNAME \
-            -p $AZURE_PASSWORD
+            uses: azure/webapps-deploy@v1
+            with:
+              app-name: Project434
