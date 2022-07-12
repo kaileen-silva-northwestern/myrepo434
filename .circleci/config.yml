@@ -7,9 +7,6 @@ version: 2.1
 orbs:
   azure-cli: circleci/azure-cli@1.2.2
 
-env:
-  AZURE_WEBAPP_NAME: Project434
-
 on:
   push:
     branches:
@@ -89,4 +86,4 @@ jobs:
       - run:
           name: deploy to azure
           command: |
-            azure/webapps-deploy@v2 -app-name $azWebAppName -publish-profile $AZURE_WEBAPP_PUBLISH_PROFILE
+            az webapp deploy --resource-group project434 --name Project434
