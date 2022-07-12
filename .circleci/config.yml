@@ -32,7 +32,6 @@ jobs:
 
     steps:
       - azure-cli/install
-      - azure-cli/login-with-service-principal
       - checkout
 
       # Download and cache dependencies
@@ -73,3 +72,8 @@ jobs:
           command: |
             . venv/bin/activate
             make lint
+        # run deploy web app to azure
+      - run:
+          name: "Deploy Web App to Azure"
+          command: |
+            az webapp deployment
