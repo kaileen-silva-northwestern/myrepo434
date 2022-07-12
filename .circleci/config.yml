@@ -73,7 +73,3 @@ jobs:
           command: |
             . venv/bin/activate
             make lint
-      # deploy to azure!
-      - run:
-          name: deploy to azure
-          command: |
