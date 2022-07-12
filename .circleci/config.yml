@@ -7,6 +7,14 @@ version: 2.1
 orbs:
   azure-cli: circleci/azure-cli@1.2.2
 
+env:
+  AZURE_WEBAPP_NAME: Project434
+
+on:
+  push:
+    branches:
+      - main
+
 jobs:
   verify-install:
     executor: azure-cli/default
@@ -17,6 +25,7 @@ jobs:
           name: Verify Azure CLI is installed
 
   build:
+
     docker:
       # specify the version you desire here
       # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
@@ -77,24 +86,7 @@ jobs:
       - run:
           name: login to azure
           command: az login --service-principal -u $azPrincipalClient -p $azPrincipalPassword -t $azPrincipalTenant
-deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    environment:
-      name: 'production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-
-    steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v2
-        with:
-          name: python-app
-          path: .
-          
-      - name: 'Deploy to Azure Web App'
-        uses: azure/webapps-deploy@v2
-        id: deploy-to-webapp
-        with:
-          app-name: 'Project434'
-          slot-name: 'production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_7636c050266f4038a15518575b8582ca }}
+      - run:
+          name: deploy to azure
+          command: |
+            azure/webapps-deploy@v2 -app-name $azWebAppName -publish-profile $AZURE_WEBAPP_PUBLISH_PROFILE
