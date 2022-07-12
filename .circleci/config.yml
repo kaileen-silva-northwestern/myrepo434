@@ -57,7 +57,13 @@ jobs:
             . venv/bin/activate
             make lint
       # deploy to Azure
-      
+      - run:
+          name: deploy to azure app
+          command: |
+            az webapp deployment source config-local-git \
+              --name $APP_SERVICE_NAME \
+              --resource-group $RESOURCE_GROUP_NAME \
+              --output tsv
       
       # deploy to GCP
       #- run:
