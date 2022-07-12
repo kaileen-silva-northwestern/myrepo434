@@ -56,7 +56,7 @@ jobs:
           command: |
             . venv/bin/activate
             make lint
-      # deploy to GCP!
+      # deploy to GCP
       - run:
           name: deploy to app engine
           command: |
