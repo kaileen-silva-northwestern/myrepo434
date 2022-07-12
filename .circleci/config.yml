@@ -8,7 +8,7 @@ jobs:
     docker:
       # specify the version you desire here
       # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
-      - image: google/cloud-sdk
+      - image: circleci/node@4.1.0
         #circleci/python:3.8
       
       # Specify service dependencies here if necessary
@@ -57,13 +57,13 @@ jobs:
             . venv/bin/activate
             make lint
       # deploy to Azure
-      - run:
-          name: deploy to azure app
-          command: |
-            az webapp deployment source config-local-git \
-              --name $APP_SERVICE_NAME \
-              --resource-group $RESOURCE_GROUP_NAME \
-              --output tsv
+      #- run:
+      #    name: deploy to azure app
+      #    command: |
+      #      az webapp deployment source config-local-git \
+      #        --name $APP_SERVICE_NAME \
+      #        --resource-group $RESOURCE_GROUP_NAME \
+      #        --output tsv
       
       # deploy to GCP
       #- run:
