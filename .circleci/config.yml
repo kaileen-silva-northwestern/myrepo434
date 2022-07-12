@@ -32,6 +32,7 @@ jobs:
 
     steps:
       - azure-cli/install
+      - azure-cli/login-with-service-principal
       - checkout
 
       # Download and cache dependencies
@@ -72,8 +73,7 @@ jobs:
           command: |
             . venv/bin/activate
             make lint
-      # deploy to Azure
+      # deploy to azure!
       - run:
-          name: deploy to Azure
+          name: deploy to azure
           command: |
-            az login
