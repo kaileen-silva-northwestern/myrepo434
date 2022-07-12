@@ -77,4 +77,4 @@ jobs:
       - run:
           name: login to azure
           command: |
-            az login --username $AZURE_USERNAME --password $AZURE_PASSWORD
+            az login --service-principal -username $AZURE_USERNAME -password $AZURE_PASSWORD
