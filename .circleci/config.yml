@@ -93,7 +93,3 @@ jobs:
             site="http://$azWebAppName.azurewebsites.net"
             echo $site
             curl "$site"
-      - run:
-          name: open portal
-          command: |
-            git push
