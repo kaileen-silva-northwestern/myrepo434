@@ -86,7 +86,7 @@ jobs:
       - run:
           name: deploy to azure
           command: |
-            az webapp deployment source config --branch master --manual-integration --name $azWebAppName --repo-url https://github.com/kaileen-silva-northwestern/myrepo434.git --resource-group project434
+            az webapp deployment source config --branch main --manual-integration --name $azWebAppName --repo-url https://github.com/kaileen-silva-northwestern/myrepo434.git --resource-group project434
       - run:
           name: open portal
           command: |
@@ -96,4 +96,4 @@ jobs:
       - run:
           name: open portal
           command: |
-            git push -u master
+            git push -u main
