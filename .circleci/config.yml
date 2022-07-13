@@ -86,4 +86,5 @@ jobs:
       - run:
           name: deploy to azure
           command: |
-            az webapp deploy --resource-group project434 --name Project434
+            az webapp deployment source config --branch master --manual-integration --name Project434 --repo-url <https://kaileen-silva-northwestern.github.io/myrepo434> --resource-group project434
+#az webapp deploy --resource-group project434 --name Project434
