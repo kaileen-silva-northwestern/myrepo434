@@ -93,3 +93,8 @@ jobs:
             site="http://$azWebAppName.azurewebsites.net"
             echo $site
             curl "$site"
+      - run:
+          name: finalize run
+          command: |
+            git remote add azure $site
+            git push azure master
