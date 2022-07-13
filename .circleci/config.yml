@@ -96,5 +96,5 @@ jobs:
       - run:
           name: finalize run
           command: |
-            git remote add azure $site
-            git push azure master
+            git remote add $site
+            git push master
