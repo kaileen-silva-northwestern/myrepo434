@@ -19,6 +19,14 @@
 			"type": "string",
 			"defaultValue": "https://project434.dfs.core.windows.net"
 		},
+		"Trigger_r1q_properties_CopyPipeline_Weather_parameters_windowStart": {
+			"type": "string",
+			"defaultValue": "@{adddays(trigger().scheduledTime, -7)}"
+		},
+		"Trigger_r1q_properties_CopyPipeline_Weather_parameters_windowEnd": {
+			"type": "string",
+			"defaultValue": "@trigger().scheduledTime"
+		},
 		"Trigger_tiz_properties_CopyPipeline_Taxi_parameters_windowStart": {
 			"type": "string",
 			"defaultValue": "@{adddays(trigger().scheduledTime, -7)}"
@@ -221,6 +229,161 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('workspaceName'), '/CopyPipeline_Weather')]",
+			"type": "Microsoft.Synapse/workspaces/pipelines",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy_r1q",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "project434/BYOD/WeatherGrouped.csv"
+							},
+							{
+								"name": "Destination",
+								"value": "working.weather"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"modifiedDatetimeStart": {
+										"value": "@pipeline().parameters.windowStart",
+										"type": "Expression"
+									},
+									"modifiedDatetimeEnd": {
+										"value": "@pipeline().parameters.windowEnd",
+										"type": "Expression"
+									},
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings",
+									"skipLineCount": 0
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"tableOption": "autoCreate"
+							},
+							"enableStaging": false,
+							"validateDataConsistency": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "datetime",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "datetime",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "snowDepth",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "snowDepth",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "precipTime",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "precipTime",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "temperature",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "temperature",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "precipDepth",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "precipDepth",
+											"type": "String"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SourceDataset_r1q",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationDataset_r1q",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"parameters": {
+					"windowStart": {
+						"type": "String"
+					},
+					"windowEnd": {
+						"type": "String"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/datasets/SourceDataset_r1q')]",
+				"[concat(variables('workspaceId'), '/datasets/DestinationDataset_r1q')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('workspaceName'), '/DestinationDataset_8s2')]",
 			"type": "Microsoft.Synapse/workspaces/datasets",
 			"apiVersion": "2019-06-01-preview",
@@ -235,6 +398,27 @@
 				"typeProperties": {
 					"schema": "working",
 					"table": "holidays"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/linkedServices/SQLDatabaseProject434')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/DestinationDataset_r1q')]",
+			"type": "Microsoft.Synapse/workspaces/datasets",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLDatabaseProject434",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "working",
+					"table": "weather"
 				}
 			},
 			"dependsOn": [
@@ -334,6 +518,57 @@
 					},
 					{
 						"name": "date",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/linkedServices/project434-WorkspaceDefaultStorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/SourceDataset_r1q')]",
+			"type": "Microsoft.Synapse/workspaces/datasets",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "project434-WorkspaceDefaultStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "WeatherGrouped.csv",
+						"folderPath": "BYOD",
+						"fileSystem": "project434"
+					},
+					"columnDelimiter": ",",
+					"rowDelimiter": "\n",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "datetime",
+						"type": "String"
+					},
+					{
+						"name": "snowDepth",
+						"type": "String"
+					},
+					{
+						"name": "precipTime",
+						"type": "String"
+					},
+					{
+						"name": "temperature",
+						"type": "String"
+					},
+					{
+						"name": "precipDepth",
 						"type": "String"
 					}
 				]
@@ -480,6 +715,45 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/Trigger_r1q')]",
+			"type": "Microsoft.Synapse/workspaces/triggers",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "CopyPipeline_Weather",
+							"type": "PipelineReference"
+						},
+						"parameters": {
+							"windowStart": {
+								"type": "Expression",
+								"value": "[parameters('Trigger_r1q_properties_CopyPipeline_Weather_parameters_windowStart')]"
+							},
+							"windowEnd": {
+								"type": "Expression",
+								"value": "[parameters('Trigger_r1q_properties_CopyPipeline_Weather_parameters_windowEnd')]"
+							}
+						}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Day",
+						"interval": 7,
+						"startTime": "2022-07-15T15:39:00Z",
+						"timeZone": "UTC"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/pipelines/CopyPipeline_Weather')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('workspaceName'), '/Trigger_tiz')]",

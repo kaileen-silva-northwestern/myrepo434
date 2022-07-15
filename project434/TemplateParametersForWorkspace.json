@@ -14,6 +14,12 @@
 		"project434-WorkspaceDefaultStorage_properties_typeProperties_url": {
 			"value": "https://project434.dfs.core.windows.net"
 		},
+		"Trigger_r1q_properties_CopyPipeline_Weather_parameters_windowStart": {
+			"value": "@{adddays(trigger().scheduledTime, -7)}"
+		},
+		"Trigger_r1q_properties_CopyPipeline_Weather_parameters_windowEnd": {
+			"value": "@trigger().scheduledTime"
+		},
 		"Trigger_tiz_properties_CopyPipeline_Taxi_parameters_windowStart": {
 			"value": "@{adddays(trigger().scheduledTime, -7)}"
 		},
