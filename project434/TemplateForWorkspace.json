@@ -19,19 +19,19 @@
 			"type": "string",
 			"defaultValue": "https://project434.dfs.core.windows.net"
 		},
-		"Trigger_8s2_properties_CopyPipeline_Holidays_parameters_windowStart": {
-			"type": "string",
-			"defaultValue": "@{adddays(trigger().scheduledTime, -7)}"
-		},
-		"Trigger_8s2_properties_CopyPipeline_Holidays_parameters_windowEnd": {
-			"type": "string",
-			"defaultValue": "@trigger().scheduledTime"
-		},
 		"Trigger_tiz_properties_CopyPipeline_Taxi_parameters_windowStart": {
 			"type": "string",
 			"defaultValue": "@{adddays(trigger().scheduledTime, -7)}"
 		},
 		"Trigger_tiz_properties_CopyPipeline_Taxi_parameters_windowEnd": {
+			"type": "string",
+			"defaultValue": "@trigger().scheduledTime"
+		},
+		"Trigger_wab_properties_CopyPipeline_Holidays_parameters_windowStart": {
+			"type": "string",
+			"defaultValue": "@{adddays(trigger().scheduledTime, -7)}"
+		},
+		"Trigger_wab_properties_CopyPipeline_Holidays_parameters_windowEnd": {
 			"type": "string",
 			"defaultValue": "@trigger().scheduledTime"
 		}
@@ -47,7 +47,7 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Copy_8s2",
+						"name": "Copy_wab",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -93,105 +93,18 @@
 								"tableOption": "autoCreate"
 							},
 							"enableStaging": false,
-							"validateDataConsistency": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "Prop_0",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Prop_0",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "countryOrRegion",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "countryOrRegion",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "holidayName",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "holidayName",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "normalizeHolidayName",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "normalizeHolidayName",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "isPaidTimeOff",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "isPaidTimeOff",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "countryRegionCode",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "countryRegionCode",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "date",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "date",
-											"type": "String"
-										}
-									}
-								],
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
+							"validateDataConsistency": false
 						},
 						"inputs": [
 							{
-								"referenceName": "SourceDataset_8s2",
+								"referenceName": "SourceDataset_wab",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "DestinationDataset_8s2",
+								"referenceName": "DestinationDataset_wab",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -213,8 +126,8 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('workspaceId'), '/datasets/SourceDataset_8s2')]",
-				"[concat(variables('workspaceId'), '/datasets/DestinationDataset_8s2')]"
+				"[concat(variables('workspaceId'), '/datasets/SourceDataset_wab')]",
+				"[concat(variables('workspaceId'), '/datasets/DestinationDataset_wab')]"
 			]
 		},
 		{
@@ -350,6 +263,27 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('workspaceName'), '/DestinationDataset_wab')]",
+			"type": "Microsoft.Synapse/workspaces/datasets",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLDatabaseProject434",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "working",
+					"table": "holidays"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/linkedServices/SQLDatabaseProject434')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('workspaceName'), '/SourceDataset_8s2')]",
 			"type": "Microsoft.Synapse/workspaces/datasets",
 			"apiVersion": "2019-06-01-preview",
@@ -437,6 +371,35 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('workspaceName'), '/SourceDataset_wab')]",
+			"type": "Microsoft.Synapse/workspaces/datasets",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "project434-WorkspaceDefaultStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "Holidays.csv",
+						"folderPath": "BYOD",
+						"fileSystem": "project434"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": false,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/linkedServices/project434-WorkspaceDefaultStorage')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('workspaceName'), '/SQLDatabaseProject434')]",
 			"type": "Microsoft.Synapse/workspaces/linkedServices",
 			"apiVersion": "2019-06-01-preview",
@@ -505,24 +468,7 @@
 			"properties": {
 				"annotations": [],
 				"runtimeState": "Stopped",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "CopyPipeline_Holidays",
-							"type": "PipelineReference"
-						},
-						"parameters": {
-							"windowStart": {
-								"type": "Expression",
-								"value": "[parameters('Trigger_8s2_properties_CopyPipeline_Holidays_parameters_windowStart')]"
-							},
-							"windowEnd": {
-								"type": "Expression",
-								"value": "[parameters('Trigger_8s2_properties_CopyPipeline_Holidays_parameters_windowEnd')]"
-							}
-						}
-					}
-				],
+				"pipelines": [],
 				"type": "ScheduleTrigger",
 				"typeProperties": {
 					"recurrence": {
@@ -533,9 +479,7 @@
 					}
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('workspaceId'), '/pipelines/CopyPipeline_Holidays')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('workspaceName'), '/Trigger_tiz')]",
@@ -574,6 +518,45 @@
 			},
 			"dependsOn": [
 				"[concat(variables('workspaceId'), '/pipelines/CopyPipeline_Taxi')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/Trigger_wab')]",
+			"type": "Microsoft.Synapse/workspaces/triggers",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "CopyPipeline_Holidays",
+							"type": "PipelineReference"
+						},
+						"parameters": {
+							"windowStart": {
+								"type": "Expression",
+								"value": "[parameters('Trigger_wab_properties_CopyPipeline_Holidays_parameters_windowStart')]"
+							},
+							"windowEnd": {
+								"type": "Expression",
+								"value": "[parameters('Trigger_wab_properties_CopyPipeline_Holidays_parameters_windowEnd')]"
+							}
+						}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Day",
+						"interval": 7,
+						"startTime": "2022-07-15T15:33:00Z",
+						"timeZone": "UTC"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/pipelines/CopyPipeline_Holidays')]"
 			]
 		},
 		{
