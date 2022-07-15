@@ -1,0 +1,16 @@
+{
+	"name": "DestinationDataset_tiz",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SQLDatabaseProject434",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "working",
+			"table": "taxi"
+		}
+	}
+}
