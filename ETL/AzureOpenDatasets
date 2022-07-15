@@ -1,0 +1,79 @@
+import pandas as pd
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
+from azureml.opendatasets import NycTlcGreen
+from azureml.opendatasets import PublicHolidays
+from azureml.opendatasets import NoaaIsdWeather
+
+green_taxi_df = pd.DataFrame([])
+start = datetime.strptime("1/1/2016","%m/%d/%Y")
+end = datetime.strptime("1/31/2016","%m/%d/%Y")
+
+for sample_month in range(12):
+    temp_df_green = NycTlcGreen(start + relativedelta(months=sample_month), end + relativedelta(months=sample_month)) \
+        .to_pandas_dataframe()
+    green_taxi_df = green_taxi_df.append(temp_df_green.sample(2000))
+
+
+def build_time_features(vector):
+    pickup_datetime = vector[0]
+    month_num = pickup_datetime.month
+    day_of_month = pickup_datetime.day
+    day_of_week = pickup_datetime.weekday()
+    hour_of_day = pickup_datetime.hour
+    country_code = "US"
+    
+    return pd.Series((month_num, day_of_month, day_of_week, hour_of_day, country_code))
+
+green_taxi_df[["month_num", "day_of_month","day_of_week", "hour_of_day", "country_code"]] = green_taxi_df[["lpepPickupDatetime"]].apply(build_time_features, axis=1)
+
+columns_to_remove = ["lpepDropoffDatetime", "puLocationId", "doLocationId", "extra", "mtaTax",
+                     "improvementSurcharge", "tollsAmount", "ehailFee", "tripType", "rateCodeID", 
+                     "storeAndFwdFlag", "paymentType", "fareAmount", "tipAmount"
+                    ]
+for col in columns_to_remove:
+    green_taxi_df.pop(col)
+    
+green_taxi_df = green_taxi_df.rename(columns={"lpepPickupDatetime": "datetime"})
+green_taxi_df["datetime"] = green_taxi_df["datetime"].dt.normalize()
+green_taxi_df.head(5)
+
+holidays_df = PublicHolidays().to_pandas_dataframe()
+holidays_df.head(5)
+
+weather_df = pd.DataFrame([])
+start = datetime.strptime("1/1/2016","%m/%d/%Y")
+end = datetime.strptime("1/31/2016","%m/%d/%Y")
+
+for sample_month in range(12):
+    tmp_df = NoaaIsdWeather(cols=["temperature", "precipTime", "precipDepth", "snowDepth"], start_date=start + relativedelta(months=sample_month), end_date=end + relativedelta(months=sample_month))\
+        .to_pandas_dataframe()
+    print("--weather downloaded--")
+    
+    # filter out coordinates not in NYC to conserve memory
+    tmp_df = tmp_df.query("latitude>=40.53 and latitude<=40.88")
+    tmp_df = tmp_df.query("longitude>=-74.09 and longitude<=-73.72")
+    print("--filtered coordinates--")
+    weather_df = weather_df.append(tmp_df)
+    
+weather_df.head(10)
+
+
+weather_df["datetime"] = weather_df["datetime"].dt.normalize()
+weather_df.pop("usaf")
+weather_df.pop("wban")
+weather_df.pop("longitude")
+weather_df.pop("latitude")
+
+# filter out NaN
+weather_df = weather_df.query("temperature==temperature")
+
+# group by datetime
+aggregations = {"snowDepth": "mean", "precipTime": "max", "temperature": "mean", "precipDepth": "max"}
+weather_df_grouped = weather_df.groupby("datetime").agg(aggregations)
+weather_df_grouped.head(10)
+
+weather_df_grouped.to_csv('/Users/***/Desktop/WeatherGrouped.csv')
+holidays_df.to_csv('/Users/***/Desktop/Holidays.csv')
+green_taxi_df.to_csv('/Users/***/Desktop/Taxi.csv')
+
