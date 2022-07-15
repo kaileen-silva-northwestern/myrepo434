@@ -1,0 +1,46 @@
+{
+	"name": "SourceDataset_r1q",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "project434-WorkspaceDefaultStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "WeatherGrouped.csv",
+				"folderPath": "BYOD",
+				"fileSystem": "project434"
+			},
+			"columnDelimiter": ",",
+			"rowDelimiter": "\n",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "datetime",
+				"type": "String"
+			},
+			{
+				"name": "snowDepth",
+				"type": "String"
+			},
+			{
+				"name": "precipTime",
+				"type": "String"
+			},
+			{
+				"name": "temperature",
+				"type": "String"
+			},
+			{
+				"name": "precipDepth",
+				"type": "String"
+			}
+		]
+	}
+}
