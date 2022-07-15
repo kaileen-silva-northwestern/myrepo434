@@ -1,0 +1,23 @@
+{
+	"name": "SourceDataset_tiz",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "project434-WorkspaceDefaultStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Taxi.csv",
+				"folderPath": "BYOD",
+				"fileSystem": "project434"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
