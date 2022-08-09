@@ -1,7 +1,10 @@
 from flask import Flask, render_template, request
 from flask_googlemaps import GoogleMaps
 
-@app.route('/predict/', methods=['GET','POST'])
+app = Flask(__name__)
+
+@app.route("/", methods= ['GET','POST'])
+
 def predict():
     if request.method == "POST":
         #get form data
