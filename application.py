@@ -9,8 +9,7 @@ app = Flask(__name__)
 
 ##@app.route('/hello', methods=['POST'])
 
-def hello():
-   name = request.form.get('name')
-
-   if name:
-       print('Request for hello page received with name=%s' % name)
+def hello_world():
+    return 'Hello World'
+if __name__ == '__main__':
+   app.run()
