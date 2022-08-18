@@ -22,7 +22,7 @@ def home():
     return """
     <html>
     <head>
-    <title>Predict Fare Prices</title>
+    <title>HTML JavaScript output on same page</title>
     <script type="text/JavaScript">
         function showMessage(){
             var message = "Point 1 Latitude:" + document.getElementById("lat1id").value +  "\nPoint 2 Longitude:" + document.getElementById("long1id").value;
