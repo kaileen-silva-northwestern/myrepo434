@@ -16,13 +16,6 @@ app = Flask(__name__)
 #    </body></html>
 #    """
 
-#<form>
-#  <label for="fname">First name:</label><br>
-#  <input type="text" id="fname" name="fname"><br>
-#  <label for="lname">Last name:</label><br>
-#  <input type="text" id="lname" name="lname">
-#</form>
-
 def home():
     return """
     <html><body>
@@ -37,6 +30,7 @@ def home():
             <label for="long2">Longitude 2:</label><br>
             <input type='text' id="long2" name="long2"><br>            
             <input type='submit' value="Submit">
+            <input type="reset">
     </body></html>
     """
 
