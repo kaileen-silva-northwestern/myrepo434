@@ -15,10 +15,22 @@ app = Flask(__name__)
 #            <input type='submit' value="Submit">
 #    </body></html>
 #    """
+# <input type='submit' value="Submit">
+# <input type="reset">
 
 def home():
     return """
-    <html><body>
+    <html>
+    <head>
+    <title>HTML JavaScript output on same page</title>
+    <script type="text/JavaScript">
+        function showMessage(){
+        document.getElementById('display').innerHTML = 
+                    document.getElementById("lat1").value;
+    }
+    </script>
+    </head>
+    <body>
     <h2> Predict Fare Prices </h2>
         <form action="/query" method ="post">
             <label for="lat1">Latitude 1:</label><br>
@@ -29,15 +41,11 @@ def home():
             <input type='text' id="lat2" name="lat2"><br>
             <label for="long2">Longitude 2:</label><br>
             <input type='text' id="long2" name="long2"><br>            
-            <input type='submit' value="Submit">
-            <input type="reset">
-        </form>            
-        <script type="text/javascript">
-            function myfunc() {
-                var input = document.getElementById('lat1');
-                alert(input.value);
-            } 
-        </script>
+          </form>
+          <input type="submit" onclick="showInput();"><br/>
+          <label>Your input: </label>
+          <p><span id='display'></span></p>
+  
     </body></html>
     """
 
