@@ -31,6 +31,12 @@ def home():
             <input type='text' id="long2" name="long2"><br>            
             <input type='submit' value="Submit">
             <input type="reset">
+            <script type="text/javascript">
+                function myfunc() {
+                    var input = document.getElementById('lat1');
+                    alert(input.value);
+                } 
+            </script>
     </body></html>
     """
 
