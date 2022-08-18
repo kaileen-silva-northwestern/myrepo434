@@ -25,7 +25,7 @@ def home():
     <title>HTML JavaScript output on same page</title>
     <script type="text/JavaScript">
         function showMessage(){
-            var message = "Point 1 Latitude" + document.getElementById("lat1id").value;
+            var message = "Point 1 Latitude:" + document.getElementById("lat1id").value + "Point 2 Longitude:" + document.getElementById("long1id").value;
             display_message.innerHTML= message;
         }
     </script>
@@ -36,7 +36,7 @@ def home():
             <label for="lat1">Latitude 1:</label><br>
             <input type='text' name="lat1" id="lat1id" ><br>
             <label for="long1">Longitude 1:</label><br>
-            <input type='text' id="long1" name="long1"><br>
+            <input type='text' name="long1" id="long1id"><br>
             <label for="lat2">Latitude 2:</label><br>
             <input type='text' id="lat2" name="lat2"><br>
             <label for="long2">Longitude 2:</label><br>
