@@ -25,7 +25,7 @@ def home():
     <title>HTML JavaScript output on same page</title>
     <script type="text/JavaScript">
         function showMessage(){
-            var message = "Point 1 Latitude:" + document.getElementById("lat1id").value + \n "Point 2 Longitude:" + document.getElementById("long1id").value;
+            var message = "Point 1 Latitude:" + document.getElementById("lat1id").value +  "\nPoint 2 Longitude:" + document.getElementById("long1id").value;
             display_message.innerHTML= message;
         }
     </script>
