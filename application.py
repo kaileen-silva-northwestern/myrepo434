@@ -2,12 +2,13 @@ from flask import Flask
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/", methods=['POST'])
 
-def hello():
-    return "Hello World!"
+##def hello():
+##    return "Hello World!"
 
-@app.route('/hello', methods=['POST'])
+##@app.route('/hello', methods=['POST'])
+
 def hello():
    name = request.form.get('name')
 
