@@ -1,4 +1,6 @@
 from flask import Flask
+import haversine as hs
+from haversine import Unit
 
 app = Flask(__name__)
 
@@ -6,17 +8,6 @@ app = Flask(__name__)
 
 ##def hello():
 ##    return "Hello World!"
-
-#def home():
-#    return """
-#    <html><body>
-#    <h2> Predict Fare Prices </h2>
-#        <form action="/query">
-#            <input type='submit' value="Submit">
-#    </body></html>
-#    """
-# <input type='submit' value="Submit">
-# <input type="reset">
 
 def home():
     return """
@@ -29,12 +20,7 @@ def home():
             display_message.innerHTML= message;
         }
     </script>
-        <script type="text/JavaScript">
-        function showMessage(){
-            var message2 = document.getElementById("long1id").value;
-            display_message.innerHTML= message2;
-        }
-    </script>
+      
     </head>
     <body>
     <h2> Predict Fare Prices </h2>
@@ -50,8 +36,6 @@ def home():
             <input type="button" onclick="showMessage()" value="submit" />
           </form>
           <p> Point 1 Latitude: <span id = "display_message"></span> </p>
-          <p> Point 2 Longitude: <span id = "display_message"></span> </p>
-  
     </body></html>
     """
 
