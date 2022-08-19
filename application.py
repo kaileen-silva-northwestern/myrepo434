@@ -1,6 +1,6 @@
 from flask import Flask
 #import haversine as hs
-from haversine import Unit
+#from haversine import Unit
 
 app = Flask(__name__)
 
