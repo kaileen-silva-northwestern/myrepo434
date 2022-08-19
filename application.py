@@ -25,8 +25,14 @@ def home():
     <title>HTML JavaScript output on same page</title>
     <script type="text/JavaScript">
         function showMessage(){
-            var message = "Point 1 Latitude:" + document.getElementById("lat1id").value +  "\nPoint 2 Longitude:" + document.getElementById("long1id").value;
+            var message = document.getElementById("lat1id").value;
             display_message.innerHTML= message;
+        }
+    </script>
+        <script type="text/JavaScript">
+        function showMessage(){
+            var message2 = document.getElementById("long1id").value;
+            display_message.innerHTML= message2;
         }
     </script>
     </head>
@@ -43,7 +49,8 @@ def home():
             <input type='text' id="long2" name="long2"><br>
             <input type="button" onclick="showMessage()" value="submit" />
           </form>
-          <p> Message is: <span id = "display_message"></span> </p>
+          <p> Point 1 Latitude: <span id = "display_message"></span> </p>
+          <p> Point 2 Longitude: <span id = "display_message"></span> </p>
   
     </body></html>
     """
