@@ -6,3 +6,9 @@ pandas
 flask
 haversine
 geopy
+requests
+numpy
+matplotlib
+tensorflow
+seaborn
+scikit-learn
