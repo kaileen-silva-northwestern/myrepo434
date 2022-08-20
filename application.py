@@ -1,5 +1,5 @@
 from flask import Flask
-from haversine import haversine as hs
+import haversine as hs
 #import haversine as hs
 #from haversine import Unit
 
