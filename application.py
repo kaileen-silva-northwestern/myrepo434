@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import json
 from flask import request
+import geopy.distance
 #import haversine as hs
 #from haversine import Unit
 
