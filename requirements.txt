@@ -4,3 +4,5 @@ jupyter
 pytest-cov
 pandas
 flask
+haversine
+geopy
