@@ -1,5 +1,5 @@
 from flask import Flask
-from geopy import distance
+from haversine import Unit
 
 app = Flask(__name__)
 
