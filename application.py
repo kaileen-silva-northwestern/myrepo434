@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import json
 from flask import request
-from geopy import distance
+from flask_googlemaps import GoogleMaps
 
 #import geopy.distance
 #import haversine as hs
