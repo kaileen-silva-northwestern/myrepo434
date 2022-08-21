@@ -20,7 +20,7 @@ def home():
             var long1coor = document.getElementById("long1id").value;
             var lat2coor = document.getElementById("lat2id").value;
             var long2coor = document.getElementById("long2id").value;            
-            var message = hs.haversine((lat1coor,long1coor),(lat2coor,long2coor),unit=Unit.MILES);
+            var message = haversine.haversine((lat1coor,long1coor),(lat2coor,long2coor),unit=Unit.MILES);
             display_message.innerHTML= message;
         }
     </script>
