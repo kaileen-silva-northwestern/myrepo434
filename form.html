@@ -1,6 +1,6 @@
-<form action="/data" method = "POST">
-    <p>Name <input type = "text" name = "Name" /></p>
-    <p>City <input type = "text" name = "City" /></p>
-    <p>Country <input type = "text" name = "Country" /></p>
-    <p><input type = "submit" value = "Submit" /></p>
-</form>
+<form action="{{ url_for("gfg")}}" method="post">
+<label for="firstname">First Name:</label>
+<input type="text" id="firstname" name="fname" placeholder="firstname">
+<label for="lastname">Last Name:</label>
+<input type="text" id="lastname" name="lname" placeholder="lastname">
+<button type="submit">Login</button>
