@@ -1,5 +1,5 @@
 from flask import Flask
-import pandas
+pip install pandas
 
 app = Flask(__name__)
 
