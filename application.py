@@ -4,23 +4,23 @@ from haversine import Unit
 
 app = Flask(__name__)
 
-@app.route("/", methods=['GET', 'POST'])
+#@app.route("/", methods=['POST', 'GET'])
 
 #def hello():
 #    return "Hello World!"
 
-def index():
+@app.route('/form')
+def form():
+    return render_template('form.html')
+ 
+@app.route('/data/', methods = ['POST', 'GET'])
+def data():
+    if request.method == 'GET':
+        return f"The URL /data is accessed directly. Try going to '/form' to submit form"
     if request.method == 'POST':
-        if request.form.get('action1') == 'VALUE1':
-            pass # do something
-        elif  request.form.get('action2') == 'VALUE2':
-            pass # do something else
-        else:
-            pass # unknown
-    elif request.method == 'GET':
-        return render_template('index.html', form=form)
-    
-    return render_template("index.html")
+        form_data = request.form
+        return render_template('data.html',form_data = form_data)
+ 
 
 #def home():
 #    return """
