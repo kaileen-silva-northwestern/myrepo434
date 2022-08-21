@@ -1,5 +1,6 @@
 from flask import Flask
 import pandas
+from haversine import Unit
 
 app = Flask(__name__)
 
