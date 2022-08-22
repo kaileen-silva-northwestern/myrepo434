@@ -1,4 +1,7 @@
-{% for key,value in form_data.items() %}
-<h2> {{key}}</h2>
-<p> {{value}}</p>
-{% endfor %}
+<form action = "https://project434.azurewebsites.net/" method = "POST">
+   <p>Name <input type = "text" name = "Name" /></p>
+   <p>Physics <input type = "text" name = "Physics" /></p>
+   <p>Chemistry <input type = "text" name = "chemistry" /></p>
+   <p>Maths <input type ="text" name = "Mathematics" /></p>
+   <p><input type = "submit" value = "submit" /></p>
+</form>
