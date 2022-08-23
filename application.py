@@ -8,15 +8,21 @@ app = Flask(__name__)
 #    return "Hello World!"
 
 @app.route('/')
-def student():
+def index():
+   print('Request for index page received')
    return render_template('data.html')
 
+@app.route('/hello', methods=['POST'])
+def hello():
+   name = request.form.get('name')
 
-@app.route('/result',methods = ['POST', 'GET'])
-def result():
-   if request.method == 'POST':
-      result = request.form
-      return render_template("form.html",result = result)
+   if name:
+       print('Request for hello page received with name=%s' % name)
+       return render_template('form.html', name = name)
+   else:
+       print('Request for hello page received with no name or blank name -- redirecting')
+       return redirect(url_for('index'))
+
 
 
 if name == 'main':
