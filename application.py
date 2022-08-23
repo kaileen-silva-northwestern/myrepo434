@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, escape
 import pandas
 from haversine import Unit
 
@@ -10,19 +10,7 @@ app = Flask(__name__)
 @app.route('/')
 
 def index():
-   print('Request for index page received')
-   return render_template('data.html')
-
-@app.route('/hello', methods=['POST'])
-def hello():
-   name = request.form.get('name')
-
-   if name:
-       print('Request for hello page received with name=%s' % name)
-       return render_template('form.html', name = name)
-   else:
-       print('Request for hello page received with no name or blank name -- redirecting')
-       return redirect(url_for('index'))
+    return render_template('form.html')
  
 
 #def home():
