@@ -24,7 +24,6 @@ def hello():
        return redirect(url_for('index'))
 
 
-
 if name == 'main':
    app.run(debug = True)
  
