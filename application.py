@@ -4,35 +4,23 @@ from haversine import Unit
 
 app = Flask(__name__)
 
-#def hello():
-#    return "Hello World!"
+
 
 @app.route('/', methods=['GET', 'POST'])
-
 def homepage():
-    if request.method == 'POST':
-        lat1 = request.form["Latitude1"]
-        return redirect(url_for("Latitude1", latitude =Latitude1))
-    else:
         return render_template("home.html")
                                 
-@app.route("/<latitude>")
-def user(latitude):
-    return f"<h1>{latitude}</h1>"                           
+
+        
+@app.route('/data/', methods=['POST', 'GET'])
+def data():
+    lat1 = request.form.get('Latitude1')
+    long1 = request.form.get('Longitude1')
+    return render_template('data.html', lat1=lat1, long1=long1)                          
 
 
-#@app.route('/form')
-#def form():
-#    return render_template('form.html')
- 
-#@app.route('/data/', methods = ['POST', 'GET'])
-#def data():
-#    if request.method == 'GET':
-#        return f"The URL /data is accessed directly. Please return home to submit form"
-#    if request.method == 'POST':
-#        form_data = request.homepage
-#        return render_template('data.html',form_data = form_data)
- 
+#def hello():
+#    return "Hello World!" 
 
 #def home():
 #    return """
