@@ -18,6 +18,12 @@ def do_something(loc1,loc2):
     distance = haversine.haversine(loc1,loc2,unit=Unit.MILES)
     return distance
 
+@app.route('/result',methods = ['POST', 'GET'])
+def result():
+    if request.method == 'POST':
+        result = request.form
+        return render_template("result.html",result = result)
+
 if __name__ == '__main__':
    app.run()
 
