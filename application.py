@@ -13,10 +13,7 @@ def homepage():
 @app.route('/result',methods = ['POST', 'GET'])
 def result():
     if request.method == "POST":
-       lat1 = request.form.get("Latitude1")
-       long1 = request.form.get("Longitude1")
-       return "Your name is "+lat1 + long1
-#      result = request.form
+    result = request.form
     return render_template("result.html",result = result)
  
         
