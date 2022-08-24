@@ -15,10 +15,10 @@ def home():
 @app.route('/result',methods = ['POST', 'GET'])
 def result():
     if request.method == 'POST':
-        data = pandas.read_csv(https://github.com/kaileen-silva-northwestern/myrepo434/blob/128cd4e1ea0db2bf52268849d94a5623a33596db/predictions.csv)
-        data_html = data.to_html()
+        #data = pandas.read_csv(https://github.com/kaileen-silva-northwestern/myrepo434/blob/128cd4e1ea0db2bf52268849d94a5623a33596db/predictions.csv)
+        #data_html = data.to_html()
         result = request.form
-        return render_template("result.html",result = result, tables=data_html)
+        return render_template("result.html",result = result)
 
 if __name__ == '__main__':
    app.run()
