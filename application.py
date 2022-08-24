@@ -21,9 +21,10 @@ def home():
 @app.route('/result',methods = ['POST', 'GET'])
 def result():
     if request.method == 'POST':
-        loc1 = "(" + request.form.get("Latitude1") + "," + request.form.get("Longitude1") + ")"
-        loc2 = "(" + request.form.get("Latitude2") + "," + request.form.get("Longitude2") + ")"
-        return "Distance is " + haversine.haversine(loc1,loc2,unit=Unit.MILES)
+        #loc1 = "(" + request.form.get("Latitude1") + "," + request.form.get("Longitude1") + ")"
+        #loc2 = "(" + request.form.get("Latitude2") + "," + request.form.get("Longitude2") + ")"
+        lat1 = request.form.get("Latitude2")
+        return "Distance is " + lat1 #haversine.haversine(loc1,loc2,unit=Unit.MILES)
     return render_template("result.html",result = result)
 
 if __name__ == '__main__':
