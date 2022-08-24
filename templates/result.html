@@ -15,12 +15,7 @@
       </table>
       <h2> Fare Predictions </h2>
       <table border = 1>
-         {% for key, value in result.items() %}
-            <tr>
-               <th> {{ key }} </th>
-               <td> {{ value }} </td>
-            </tr>
-         {% endfor %}
+         {{tables|safe}}
       </table>
    </body>
 </html>
