@@ -15,8 +15,9 @@ def home():
 @app.route('/result',methods = ['POST', 'GET'])
 def result():
     if request.method == 'POST':
+        data = pandas.read_csv(https://github.com/kaileen-silva-northwestern/myrepo434/blob/128cd4e1ea0db2bf52268849d94a5623a33596db/predictions.csv)
         result = request.form
-        return render_template("result.html",result = result)
+        return render_template("result.html",result = result, tables=[data.to_html()], titles=[''])
 
 if __name__ == '__main__':
    app.run()
