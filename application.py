@@ -12,6 +12,12 @@ app = Flask(__name__)
 def home():
     return render_template('home.html')
 
+def do_something(loc1,loc2):
+    loc1 = "(" + request.form.get("Latitude1") + "," + request.form.get("Longitude1") + ")"
+    loc2 = "(" + request.form.get("Latitude2") + "," + request.form.get("Longitude2") + ")" 
+    distance = haversine.haversine(loc1,loc2,unit=Unit.MILES)
+    return distance
+
 if __name__ == '__main__':
    app.run()
 
