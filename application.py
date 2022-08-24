@@ -3,9 +3,6 @@ import pandas
 from haversine import Unit
 
 app = Flask(__name__)
- 
- 
-  
 
 @app.route('/')
 def homepage():
@@ -25,12 +22,10 @@ def result():
     #result = request.form
     return render_template("result.html",result = result)
  
-                             
-
-
-  
-  
-  
+ 
+ 
+if __name__ == '__main__':
+   app.run()
 
 #def hello():
 #    return "Hello World!" 
@@ -69,5 +64,4 @@ def result():
 #    </body></html>
 #    """
 
-if __name__ == '__main__':
-   app.run()
+
