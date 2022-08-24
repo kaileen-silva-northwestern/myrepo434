@@ -9,40 +9,33 @@ app = Flask(__name__)
 #    return "Hello World!" 
 
 @app.route('/')
-def homepage():
-        return render_template("home.html")
+def home():
+    return render_template('home.html')
 
+if __name__ == '__main__':
+   app.run()
 
-
-@app.route('/result',methods = ['POST', 'GET'])
-def result():
-        if request.method == 'POST':
-                lat1 = request.form.get("Latitude1")
-                long1 = request.form.get("Longitude1")
-                return "Your name is " lat1+long1
-                #result = request.form
-                return render_template("result.html",result = result)
-
+#@app.route('/')
+#def homepage():
+#        return render_template("home.html")
 
 #@app.route('/result',methods = ['POST', 'GET'])
 #def result():
-#        if request.method == "POST":
-#       lat1 = request.form.get("Latitude1")
-#       long1 = request.form.get("Longitude1")
-    #   lat2 = request.form.get("Latitude2")
-    #   long2 = request.form.get("Longitude2")
-    #   loc1 = "(" + lat1 + "," + long1 + ")"
-    #   loc2 = "(" + lat1 + "," + long1 + ")"
-#        return "Your name is "+lat1+long1
-    #   return "Distance is " haversine.haversine(loc1,loc2,unit=Unit.MILES)
-    #result = request.form
-#    return render_template("result.html")        
-    #return render_template("result.html",result = result)
+#        if request.method == 'POST':
+#                lat1 = request.form.get("Latitude1")
+#                long1 = request.form.get("Longitude1")
+#                return "Your name is " lat1+long1
+#                #result = request.form
+#                return render_template("result.html",result = result)
+#   return "Distance is " haversine.haversine(loc1,loc2,unit=Unit.MILES)
  
  
  
-if __name__ == '__main__':
-   app.run()
+
+
+
+
+
 
 #def hello():
 #    return "Hello World!" 
