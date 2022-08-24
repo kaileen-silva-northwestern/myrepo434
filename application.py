@@ -4,13 +4,13 @@ from haversine import Unit
 
 app = Flask(__name__)
 
-@app.route('/')
-def hello():
-    return "Hello World!" 
-
 #@app.route('/')
-#def homepage():
-#        return render_template("home.html")
+#def hello():
+#    return "Hello World!" 
+
+@app.route('/')
+def homepage():
+        return render_template("home.html")
 
                                  
 #@app.route('/result',methods = ['POST', 'GET'])
