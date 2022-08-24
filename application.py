@@ -5,16 +5,24 @@ from haversine import Unit
 app = Flask(__name__)
 
 
+@app.route('/')
 
-@app.route('/', methods = ['POST', 'GET'])
 def homepage():
-        return render_template("home.html")
+    if request.method == "POST":
+       lat1 = request.form.get("Latitude1")
+       long1 = request.form.get("Longitude1")
+       return "Your name is "+lat1 + long1
+    return render_template("home.html")
+
+
+#def homepage():
+#        return render_template("home.html")
                                  
-@app.route('/result',methods = ['POST', 'GET'])
-def result():
-   if request.method == 'POST':
-      result = request.form
-      return render_template("result.html",result = result)
+#@app.route('/result',methods = ['POST', 'GET'])
+#def result():
+#   if request.method == 'POST':
+#      result = request.form
+#      return render_template("result.html",result = result)
  
         
         
