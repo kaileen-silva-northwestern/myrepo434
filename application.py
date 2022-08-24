@@ -27,7 +27,7 @@ def result():
         long1 = request.form.get("Longitude1")
         lat2 = request.form.get("Latitude2")
         long2 = request.form.get("Longitude2")
-        return "Distance is " + haversine.haversine((lat1,long1),(lat2,long2),unit=Unit.MILES)
+        return "Distance is " + "( " + lat1 ", " + long1 +" )" + "( " + lat2 ", " + long2 +" )"
     return render_template("result.html",result = result)
 
 if __name__ == '__main__':
