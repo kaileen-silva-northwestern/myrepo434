@@ -12,17 +12,19 @@ app = Flask(__name__)
 def home():
     return render_template('home.html')
 
-def do_something(loc1,loc2):
-    loc1 = "(" + request.form.get("Latitude1") + "," + request.form.get("Longitude1") + ")"
-    loc2 = "(" + request.form.get("Latitude2") + "," + request.form.get("Longitude2") + ")" 
-    distance = haversine.haversine(loc1,loc2,unit=Unit.MILES)
-    return distance
+#def do_something(loc1,loc2):
+#    loc1 = "(" + request.form.get("Latitude1") + "," + request.form.get("Longitude1") + ")"
+#    loc2 = "(" + request.form.get("Latitude2") + "," + request.form.get("Longitude2") + ")" 
+#    distance = haversine.haversine(loc1,loc2,unit=Unit.MILES)
+#    return distance
 
 @app.route('/result',methods = ['POST', 'GET'])
 def result():
     if request.method == 'POST':
-        result = request.form
-        return render_template("result.html",result = result)
+        loc1 = "(" + request.form.get("Latitude1") + "," + request.form.get("Longitude1") + ")"
+        loc2 = "(" + request.form.get("Latitude2") + "," + request.form.get("Longitude2") + ")"
+        return "Distance is " + haversine.haversine(loc1,loc2,unit=Unit.MILES)
+    return render_template("result.html",result = result)
 
 if __name__ == '__main__':
    app.run()
@@ -33,13 +35,9 @@ if __name__ == '__main__':
 
 #@app.route('/result',methods = ['POST', 'GET'])
 #def result():
-#        if request.method == 'POST':
-#                lat1 = request.form.get("Latitude1")
-#                long1 = request.form.get("Longitude1")
-#                return "Your name is " lat1+long1
-#                #result = request.form
-#                return render_template("result.html",result = result)
-#   return "Distance is " haversine.haversine(loc1,loc2,unit=Unit.MILES)
+#    if request.method == 'POST':
+#        result = request.form
+#        return render_template("result.html",result = result)
  
  
  
