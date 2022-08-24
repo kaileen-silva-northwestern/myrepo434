@@ -12,39 +12,42 @@ app = Flask(__name__)
 def home():
     return render_template('home.html')
 
+@app.route('/result',methods = ['POST', 'GET'])
+def result():
+    if request.method == 'POST':
+        result = request.form
+        return render_template("result.html",result = result)
+
+if __name__ == '__main__':
+   app.run()
+
+
 #def do_something(loc1,loc2):
 #    loc1 = "(" + request.form.get("Latitude1") + "," + request.form.get("Longitude1") + ")"
 #    loc2 = "(" + request.form.get("Latitude2") + "," + request.form.get("Longitude2") + ")" 
 #    distance = haversine.haversine(loc1,loc2,unit=Unit.MILES)
 #    return distance
 
-@app.route('/result',methods = ['POST', 'GET'])
-def result():
-    if request.method == 'POST':
-        #loc1 = "(" + request.form.get("Latitude1") + "," + request.form.get("Longitude1") + ")"
-        #loc2 = "(" + request.form.get("Latitude2") + "," + request.form.get("Longitude2") + ")"
-        lat1 = request.form.get("Latitude1")
-        long1 = request.form.get("Longitude1")
-        lat2 = request.form.get("Latitude2")
-        long2 = request.form.get("Longitude2")
-        return "Distance is " + "( " + lat1 ", " + long1 +" )" + "( " + lat2 ", " + long2 +" )"
-    return render_template("result.html",result = result)
 
-if __name__ == '__main__':
-   app.run()
 
 #@app.route('/')
 #def homepage():
 #        return render_template("home.html")
+ 
+ 
 
 #@app.route('/result',methods = ['POST', 'GET'])
 #def result():
 #    if request.method == 'POST':
-#        result = request.form
-#        return render_template("result.html",result = result)
- 
- 
- 
+#        #loc1 = "(" + request.form.get("Latitude1") + "," + request.form.get("Longitude1") + ")"
+#        #loc2 = "(" + request.form.get("Latitude2") + "," + request.form.get("Longitude2") + ")"
+#        lat1 = request.form.get("Latitude1")
+#        long1 = request.form.get("Longitude1")
+#        lat2 = request.form.get("Latitude2")
+#        long2 = request.form.get("Longitude2")
+#        return "Distance is " + "( " + lat1 ", " + long1 +" )" + "( " + lat2 ", " + long2 +" )"
+#    return render_template("result.html",result = result)
+
 
 
 
