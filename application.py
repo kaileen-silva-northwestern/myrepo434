@@ -17,9 +17,9 @@ def result():
     if request.method == 'POST':
         url = "https://raw.githubusercontent.com/kaileen-silva-northwestern/myrepo434/main/predictions.csv"
         data = pd.read_csv(url, index_col=0)
-        data_html = data.to_html()
+        table = data.to_html(index=False)
         result = request.form
-        return render_template("result.html",result = result, tables=data_html)
+        return render_template("result.html",result = result, table=table)
 
 if __name__ == '__main__':
    app.run()
