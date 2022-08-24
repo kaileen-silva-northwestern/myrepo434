@@ -5,27 +5,25 @@ from haversine import Unit
 app = Flask(__name__)
  
  
-@app.route('/')
-def hello():
-    return "Hello World!"  
+  
 
-#@app.route('/')
-#def homepage():
-#        return render_template("home.html")
+@app.route('/')
+def homepage():
+        return render_template("home.html")
 
                                  
-#@app.route('/result',methods = ['POST', 'GET'])
-#def result():
-#    if request.method == "POST":
-#       lat1 = request.form.get("Latitude1")
-#       long1 = request.form.get("Longitude1")
-#       lat2 = request.form.get("Latitude2")
-#       long2 = request.form.get("Longitude2")
-#       loc1 = "(" + lat1 + "," + long1 + ")"
-#       loc2 = "(" + lat1 + "," + long1 + ")"
-#       return "Distance is " haversine.haversine(loc1,loc2,unit=Unit.MILES)
-#    #result = request.form
-#    return render_template("result.html",result = result)
+@app.route('/result',methods = ['POST', 'GET'])
+def result():
+    if request.method == "POST":
+       lat1 = request.form.get("Latitude1")
+       long1 = request.form.get("Longitude1")
+       lat2 = request.form.get("Latitude2")
+       long2 = request.form.get("Longitude2")
+       loc1 = "(" + lat1 + "," + long1 + ")"
+       loc2 = "(" + lat1 + "," + long1 + ")"
+       return "Distance is " haversine.haversine(loc1,loc2,unit=Unit.MILES)
+    #result = request.form
+    return render_template("result.html",result = result)
  
                              
 
