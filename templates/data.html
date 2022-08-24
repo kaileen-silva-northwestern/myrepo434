@@ -1,5 +1,13 @@
+<!doctype html>
 <html>
-    <body>
-        {{ lat1 }} {{ long1 }}
-    </body>
+   <body>
+      <table border = 1>
+         {% for key, value in data.items() %}
+            <tr>
+               <th> {{ key }} </th>
+               <td> {{ value }} </td>
+            </tr>
+         {% endfor %}
+      </table>
+   </body>
 </html>
