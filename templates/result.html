@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
    <head>
-      <title>Test</title>
+      <title>Taxi Fare Results</title>
    </head>
    <body>
       <h2> Results </h2>
@@ -12,6 +12,14 @@
                <td> {{ value }} </td>
             </tr>
          {% endfor %}
+      </table>
+      <table>
+         <h1>
+            {% for table in tables %}
+            <h2>{{titles[loop.index]}}</h2>
+            {{ table|safe }}
+            {% endfor %}
+         </h1>
       </table>
    </body>
 </html>
