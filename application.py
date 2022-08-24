@@ -1,6 +1,6 @@
 from flask import Flask, redirect, url_for, render_template, request
 import pandas
-from haversine import Unit
+from haversine import Unit, haversine
 
 app = Flask(__name__)
 
