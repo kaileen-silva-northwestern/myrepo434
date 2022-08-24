@@ -10,16 +10,16 @@ app = Flask(__name__)
 def homepage():
         return render_template("home.html")
                                  
-@app.route('/data',methods = ['POST', 'GET'])
+@app.route('/result',methods = ['POST', 'GET'])
 def result():
    if request.method == 'POST':
-      data = request.form
-      return render_template("data.html",result = result)
+      result = request.form
+      return render_template("result.html",result = result)
  
         
         
-#@app.route('/data/', methods=['POST', 'GET'])
-#def data():
+#@app.route('/result', methods=['POST', 'GET'])
+#def result():
 #    lat1 = request.form['Latitude1']
 #    long1 = request.form['Longitude1']
 #    print("The Latitude is '" + Latitude1 + "' + and the Longitude is " + Longitude1 + "'")                      
