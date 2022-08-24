@@ -13,7 +13,14 @@ def homepage():
 @app.route('/result',methods = ['POST', 'GET'])
 def result():
     if request.method == "POST":
-    result = request.form
+       lat1 = request.form.get("Latitude1")
+       long1 = request.form.get("Longitude1")
+       lat2 = request.form.get("Latitude2")
+       long2 = request.form.get("Longitude2")
+       loc1 = "(" + lat1 + "," + long1 + ")"
+       loc2 = "(" + lat1 + "," + long1 + ")"
+       return "Distance is " haversine.haversine(loc1,loc2,unit=Unit.MILES)
+    #result = request.form
     return render_template("result.html",result = result)
  
         
