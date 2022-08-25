@@ -21,7 +21,7 @@ def result():
         #data = data.to_json()
         result = request.form
         return render_template("result.html",result = result, tables=data)
-        #return render_template("result.html",result = result, tables=data, titles=[''])
+        #return render_template("result.html",result = result, tables=table, titles=[''])
 
 if __name__ == '__main__':
    app.run()
