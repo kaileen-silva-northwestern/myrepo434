@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for, render_template, request
+from flask import Flask, redirect, url_for, render_template, request, jsonify
 import pandas
 from haversine import Unit
  
@@ -20,7 +20,7 @@ def result():
         #table = data.to_html(index=False)
         data = data.to_json()
         result = request.form
-        return render_template("result.html",result = result, data=data)
+        return render_template("result.html",result = result), jsonify(data)
         #return render_template("result.html",result = result, tables=[data.to_html(index=False)], titles=[''])
 
 if __name__ == '__main__':
