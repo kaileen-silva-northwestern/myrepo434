@@ -14,8 +14,13 @@
          {% endfor %}
       </table>
       <h2> Fare Predictions </h2>
-      <div>
-         {{ table | safe }}
-      </div>
+         <table>
+                <h1>
+                   {% for table in tables %}
+                   <h2>{{titles[loop.index]}}</h2>                            
+                   {{ table|safe }}
+                   {% endfor %}     
+                </h1> 
+         </table>
    </body>
 </html>
