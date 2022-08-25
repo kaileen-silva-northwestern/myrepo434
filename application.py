@@ -11,21 +11,20 @@ def home():
 @app.route('/result',methods = ['POST', 'GET'])
 def result():
     if request.method == 'POST':
-        test = request.form.get("Latitude1")
         #loc1 = "(" + request.form.get("Latitude1") + "," + request.form.get("Longitude1") + ")"
         #loc2 = "(" + request.form.get("Latitude2") + "," + request.form.get("Longitude2") + ")"
+        #distance = haversine.haversine(loc1,loc2,unit=Unit.MILES)
         url = "https://raw.githubusercontent.com/kaileen-silva-northwestern/myrepo434/main/predictions.csv"
         data = pandas.read_csv(url, index_col=0)
         table = data.to_dict(orient='records')
         result = request.form
-        return render_template("result.html",result = result, table=table, test=test)
+        return render_template("result.html",result = result, table=table)
 
        
 if __name__ == '__main__':
    app.run()
 
  
-#    distance = haversine.haversine(loc1,loc2,unit=Unit.MILES) 
         #table = data.to_html()
         #table = data.to_html(index=False)
         #data = data.to_json()
