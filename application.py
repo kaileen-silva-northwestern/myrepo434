@@ -15,8 +15,8 @@ def home():
 @app.route('/result',methods = ['POST', 'GET'])
 def result():
     if request.method == 'POST':
-        #url = "https://raw.githubusercontent.com/kaileen-silva-northwestern/myrepo434/main/predictions.csv"
-        #data_read = pandas.read_csv(url, index_col=0)
+        url = "https://raw.githubusercontent.com/kaileen-silva-northwestern/myrepo434/main/predictions.csv"
+        data_read = pandas.read_csv(url, index_col=0)
         #table = data.to_html(index=False)
         #data = data.to_json()
         result = request.form
