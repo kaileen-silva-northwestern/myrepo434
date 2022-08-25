@@ -20,7 +20,7 @@ def result():
         table = data.to_html(index=False)
         #data = data.to_json()
         result = request.form
-        return render_template("result.html",result = result)
+        return render_template("result.html",result = result, tables=data)
         #return render_template("result.html",result = result, tables=data, titles=[''])
 
 if __name__ == '__main__':
