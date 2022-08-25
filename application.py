@@ -21,7 +21,7 @@ def result():
         #table = data.to_html(index=False)
         #data = data.to_json()
         result = request.form
-        return render_template("result.html",result = result, tables=table, titles=['index','distance','min','max'])
+        return render_template("result.html",result = result, tables=table, titles=[''])
         #return render_template("result.html",result = result, tables=table, titles=[''])
 
 if __name__ == '__main__':
