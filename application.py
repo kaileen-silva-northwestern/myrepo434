@@ -16,10 +16,12 @@ def home():
 def result():
     if request.method == 'POST':
         url = "https://raw.githubusercontent.com/kaileen-silva-northwestern/myrepo434/main/predictions.csv"
-        data = pd.read_csv(url, index_col=0)
+        data_read = pd.read_csv(url, index_col=0)
         #table = data.to_html(index=False)
+        data = data.to_json()
         result = request.form
-        return render_template("result.html",result = result, tables=[data.to_html(index=False)], titles=[''])
+        return render_template("result.html",result = result, data=data)
+        #return render_template("result.html",result = result, tables=[data.to_html(index=False)], titles=[''])
 
 if __name__ == '__main__':
    app.run()
