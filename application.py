@@ -11,7 +11,7 @@ def home():
 @app.route('/result',methods = ['POST', 'GET'])
 def result():
     if request.method == 'POST':
-        test = "Distance is " + loc1 + ", " + loc2
+        test = loc1 + loc2
         loc1 = "(" + request.form.get("Latitude1") + "," + request.form.get("Longitude1") + ")"
         loc2 = "(" + request.form.get("Latitude2") + "," + request.form.get("Longitude2") + ")"
         url = "https://raw.githubusercontent.com/kaileen-silva-northwestern/myrepo434/main/predictions.csv"
