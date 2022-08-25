@@ -14,7 +14,24 @@
          {% endfor %}
       </table>
       <div>
-         {{ table|safe }}
+         <table class="table">
+            <thead>
+               <tr>
+                  <th scope="distance">distance</th>
+                  <th scope="min">min</th>
+                  <th scope="max">max</th>
+               </tr>
+            </thead>
+            <tbody>
+               {% for row in data %}
+               <tr>
+                  <td>{{row['distance']}}</td>
+                  <td>{{row['min']}}</td>
+                  <td>{{row['max']}}</td>
+               </tr>
+               {% endfor %}
+            </tbody>
+         </table>
       </div>      
    </body>
 </html>
